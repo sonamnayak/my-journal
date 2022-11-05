@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Login</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+	<div class="flex w-4/5 m-auto">
+		<div class="flex-1">
+			<img src="images/signin.png" alt="Sign In" />
+		</div>
+		<div class="flex-1 m-auto ml-10">
+			<h1 class="text-3xl font-semibold mb-6 text-[#77dd77]">Welcome Back! Login Here</h1>
+			<form action="/register" method="POST">
+				<input class="border-0 border-b-[1.5px] border-[#77dd77] pb-[4px] text-base w-[300px] outline-none" type="email" name="email" placeholder="Enter your email..." autoFocus />
+				<input class="border-0 border-b-[1.5px] border-[#77dd77] pb-[4px] text-base w-[300px] outline-none mt-4" type="password" name="password" placeholder="Enter your password..." autoFocus/> <br /> 
+				<button class="text-[#77dd77] mt-6 border-[1.5px] border-[#77dd77] py-[4px] px-[13px] bg-white rounded-full text-[16px] hover:bg-[#77dd77] hover:text-white" type="submit">
+					Login
+				</button>
+			</form>
+			<form class="mt-4 text-base" action="/regiter" method="POST">
+				<label>New user?</label>
+				<button type="submit" class="text-[#77dd77]" >Register</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

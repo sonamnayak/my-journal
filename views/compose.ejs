@@ -1,0 +1,14 @@
+<%- include("partials/header"); -%>
+
+<h1 class="text-5xl my-8"> Add To Your Journal </h1>
+<form action="/compose" method="POST">
+	<div class="form-group">
+		<label class="my-4 text-[18px] text-[#77dd77]">Title</label>
+		<input class="form-control" type="text" name="postTitle">
+		<label class="my-4 text-[17px] text-[#77dd77]">Body</label>
+		<textarea class="form-control" name="postBody" rows="5" cols="30"></textarea>
+	</div>
+	<button class="btn btn-primary bg-[#77dd77] border-[#77dd77] add" type="submit" name="button">ADD</button>
+</form>
+
+<%- include("partials/footer"); -%>
