@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const ejs = require('ejs');
 const env = require('dotenv');
 const mongoose = require('mongoose');
+const _ = require('lodash')
 env.config();
 const Post = require('./models/Post');
 const User = require('./models/User');
@@ -42,41 +43,52 @@ app.get('/home', async function(req, res){
 })
 
 app.post('/register', async function(req, res){
-	bcrypt.hash(req.body.password, saltRounds, function(err, hash){
+	bcrypt.hash(req.body.password, saltRounds, async function(err, hash){
 		const newUser = new User({
-			email: req.body.email,
-			password: hash
+			username: req.body.email,
+			password: hash 
 		})
-		newUser.save(function(err){
-			if(err){
-				console.log(err);
-        res.redirect('/register')
-			}
-			else{
-				res.redirect('/home');
-			}
-		})
+		try {
+			await newUser.save(function(err){
+				if(err){
+					console.log(err);
+					res.redirect('/register')
+				}
+				else{
+					res.redirect('/home');
+				}
+			})
+		} catch (error) {
+			
+		}
+		
 	})
 })
 
-app.post('/login', function(req, res){
-	const email = req.body.email;
-	const password = req.body.password  ;
-	User.findOne({email:email}, function(err, foundUser){
-		if(err){
-			console.log(err);
-      res.redirect('/login')
-		}
-		else{
-			if(foundUser){
-				bcrypt.compare(password, foundUser.password, function(err, result){
-					if(result == true){
-						res.redirect('/home');
-					}
-				})
+app.post('/login', async function(req, res){
+	
+	const username = req.body.email;
+	const password = req.body.password;
+	try {
+		await User.findOne({username:username}, function(err, foundUser){
+			if(err){
+				console.log(err);
+				  res.redirect('/login')
 			}
-		}
-	})
+			else{
+				if(foundUser){
+					bcrypt.compare(password, foundUser.password, function(err, result){
+						if(result == true){
+							res.redirect('/home');
+						}
+					})
+				}
+			}
+		})
+	} catch (error) {
+		console.log(error);
+	}
+	
 })
 
 app.get('/compose', function(req,res){
@@ -95,7 +107,7 @@ app.post('/compose', async function(req,res){
   } catch (error) {
     console.log(error);
   }
-  res.redirect("/");
+  res.redirect("/home");
 });
 
 app.get('/posts/:postName', function(req,res){
@@ -107,6 +119,10 @@ app.get('/posts/:postName', function(req,res){
     }
   })
 });
+
+app.get('/logout', function(req,res){
+	res.render('logout');
+})
 
 
 
