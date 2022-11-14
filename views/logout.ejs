@@ -1,0 +1,15 @@
+<%- include("partials/header"); -%>
+
+<div class="w-full h-[86vh] flex justify-center flex-col items-center">
+    <h3 class="text-[#77dd77] font-semibold text-5xl text-center mb-6">ARE YOU SURE?</h3>
+    <div class="flex">
+        <form action="/home" method="get">
+            <button type="submit" class="mx-6 text-[#77dd77] mt-6 border-[1.5px] border-[#77dd77] py-[4px] px-[13px] bg-white rounded-full text-[16px]">CANCEL</button>
+        </form>
+        <form action="/login" method="get">
+            <button type="submit" class="mx-6 text-white mt-6 border-[1.5px] border-[#77dd77] py-[4px] px-[13px] bg-[#77dd77] rounded-full text-[16px]">LOGOUT</button>
+        </form>
+    </div>
+</div>
+
+<%- include("partials/footer"); -%>
